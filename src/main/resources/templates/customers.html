@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage customers</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid text-center">
+  <br>
+  <div><h1>Manage customers</h1></div>
+  <br>
+  <div class="mr-6">
+    <a class="h3" th:href="@{/customers/new}">Add New Customer</a>
+  </div>
+  <br>
+
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div th:if="${message_fail}" class="alert alert-warning text-center">
+    [[${message_fail}]]
+  </div>
+
+  <div>
+    <table class="table table-boarded table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Vat ID</th>
+          <th>Creation Date</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <th:block th:each="customer: ${listCustomers}">
+          <tr>
+            <td>[[${customer.id}]]</td>
+            <td>[[${customer.name}]]</td>
+            <td>[[${customer.address}]]</td>
+            <td>[[${customer.vatId}]]</td>
+            <td>[[${customer.creationDate}]]</td>
+            <td>
+              <a class="h5 mr-3" th:href="@{'/customers/edit/' + ${customer.id}}">Edit</a>
+              <a class="h5" th:href="@{'/customers/delete/' + ${customer.id}}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
